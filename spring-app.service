@@ -1,0 +1,18 @@
+[Unit]
+Description=Spring Boot Application (spring-app)
+Documentation=file:/opt/spring-app/app.jar
+After=network-online.target mysql.service
+Wants=network-online.target mysql.service
+
+[Service]
+Type=simple
+User=spring-runner
+Group=spring-runner
+WorkingDirectory=/opt/spring-app
+ExecStart=/usr/bin/java -jar /opt/spring-app/app.jar
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
